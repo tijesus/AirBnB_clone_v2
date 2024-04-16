@@ -1,5 +1,5 @@
 -- Creating Databe for the project
-CREATE DATABASE IF NOT EXISTS hbnb_test_db;
+CREATE DATABASE IF NOT EXISTS hbnb_dev_db;
 -- Creating user database with password
 CREATE USER IF NOT EXISTS 'hbnb_dev'@'localhost' IDENTIFIED BY 'hbnb_dev_pwd';
 -- Giving all database permission to user
