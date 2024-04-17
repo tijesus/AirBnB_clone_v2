@@ -10,17 +10,19 @@ from sqlalchemy.orm import relationship
 
 class State(BaseModel, Base):
     """ State class """
+
     __tablename__ = "states"
     name = Column(String(128), nullable=False)
     cities = relationship("City",  backref="state", cascade="delete")
 
+    # File storage
     if os.getenv('HBNB_TYPE_STORAGE') != 'db':
         @property
         def cities(self):
-            """fs getter attribute that returns City instances"""
-            values_city = models.storage.all("City").values()
-            list_city = []
-            for city in values_city:
-                if city.state_id == self.id:
-                    list_city.append(city)
-            return list_city
+            """
+            Getter attribute cities that returns the list of
+            City instances with state_id equals to the
+            current State.id
+            """
+            obj_cities = models.storage.all(City).values()
+            return [c for c in obj_cities if self.id == c.state_id]
